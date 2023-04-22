@@ -4,7 +4,27 @@
 
 <div id="content">
 
+<p style="text-align: center">
+    <img src="{{ url_for('static', filename='img/logo.png') }}" />
+</p>
 
+<h1>DevOps Solutions Map v{{ version }}</h1>
+
+<p>A Python-based application that help you to chart your DevOps use cases and tools.</p>
+
+<p><a href="https://github.com/Wivik/devops-solutions-map" target="_blank">Contribute on GitHub</a></p>
+
+
+<h2>Content definition file reference</h2>
+
+<details>
+    <summary>Click to open</summary>
+    {{ data_spec }}
+</details>
+
+<h2>Changelog</h2>
+
+{{ changelog_content }}
 
 </div>
 

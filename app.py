@@ -1,10 +1,12 @@
 from flask import Flask
-import os
 from flask import render_template, request, redirect, url_for, flash, session
 from flask_wtf.csrf import CSRFProtect
+import markdown
+import os
 import pathlib
 import sys
 import yaml
+import json
 
 
 app = Flask(__name__)
@@ -106,4 +108,15 @@ def tool_view(tool):
 
 @app.route("/about")
 def about():
-    return render_template('about.html.j2')
+
+    changelog = open(os.path.join(app_path, 'CHANGELOG.md'), 'r')
+    changelog_content = markdown.markdown(changelog.read())
+
+    data_spec_file = open(os.path.join(app_path, 'data-format.md'), 'r')
+    data_spec = markdown.markdown(data_spec_file.read(), extensions=['markdown.extensions.tables', 'markdown.extensions.fenced_code', 'markdown.extensions.codehilite'])
+
+    version_file = open(os.path.join(app_path, 'version_file.json'), 'r')
+    version = json.load(version_file)
+    version = str(version['version'])
+
+    return render_template('about.html.j2', changelog_content=changelog_content, version=version, data_spec=data_spec)
