@@ -16,4 +16,4 @@ jobs:
       contents: write
       packages: write
     if: ${{ github.actor != 'dependabot[bot]' }}
-    uses: Wivik/pyp-boy/.github/workflows/release.yml@main
+    uses: Wivik/devops-solutions-map/.github/workflows/release.yml@main

@@ -22,7 +22,7 @@
         <p>
         {{ usage.side|capitalize }} &gt;
         {{ usage.step|capitalize }} &gt;
-        {{ usage.uc|capitalize }} {% if usage.isnew %}✨{% endif %} : {{ usage.state|capitalize }}
+        {{ usage.uc|capitalize }} {% if usage.isnew %}✨{% endif %} : {{ usage.state|capitalize|default('unknown') }}
         </p>
 
     {% endfor %}
