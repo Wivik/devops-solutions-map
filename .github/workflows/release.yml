@@ -1,0 +1,48 @@
+name: Build and publish image
+
+on:
+  workflow_dispatch:
+  workflow_call:
+
+env:
+  REGISTRY: ghcr.io
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+    steps:
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Produce release note
+        uses: TriPSs/conventional-changelog-action@v3
+        id: changelog
+        with:
+          github-token: ${{ secrets.github_token }}
+          version-file: './version_file.json'
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: true
+          tags: "${{ env.REGISTRY }}/wivik/devops-solutions-map:${{ steps.changelog.outputs.tag }}"
+          file: Containerfile
+          context: .
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v1
+        with:
+          body: ${{ steps.changelog.outputs.clean_changelog }}
+          tag_name: ${{ steps.changelog.outputs.tag }}
+
