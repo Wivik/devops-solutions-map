@@ -1,0 +1,263 @@
+/* variables */
+
+:root {
+    --sans-font: Arial, Helvetica, sans-serif;
+    --mono-font: Consolas, Menlo, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+
+
+    --side-dev-bg-color: #DAE8FC;
+    --side-dev-border-color: #6C8EBF;
+    --side-ops-bg-color: #FFF2CC;
+    --side-ops-border-color: #D6B656;
+    --general-uc-bg-color: #F5F5F5;
+    --general-uc-border-color: #666666;
+    --usecase-tool-bg-color: #4e4e4e;
+    --usecase-tool-border-color: #292929;
+    --usecase-tool-bg-color-hover: #949494;
+    --standard-border-radius: 5px;
+    --text: #000;
+    --bg: #fff;
+    --main-menu-link-color: #fff;
+    --main-menu-link-bg-color-hover: #4e4e4e;
+    --main-menu-link-bg-color: #949494;
+
+    --footer-bg-color: #F5F5F5;
+    --footer-border-color: #666666;
+    --footer-font-color: #4e4e4e;
+
+    --orange: #FA6800;
+    --red: #A20025;
+    --grey: grey;
+    --green: #60A917;
+    --white: white;
+    --black: black;
+    --yellow: #b9a402;
+}
+
+/* Main parts */
+
+html {
+    font-family: var(--sans-font);
+}
+
+body {
+    color: var(--text);
+    background-color: var(--bg);
+    font-size: 1.15rem;
+    line-height: 1.5;
+    margin:0;
+    padding:0;
+}
+
+/* Main menu */
+
+header {
+    background-color: var(--footer-bg-color);
+    padding: 1rem;
+    padding-bottom: 0;
+    background-repeat: no-repeat;
+    background-position: right top;
+}
+
+header > nav a:link,
+header > nav a:visited {
+    display: inline-block;
+    color: var(--main-menu-link-color);
+    border: 1px solid var(--main-menu-link-border-color);
+    background-color: var(--main-menu-link-bg-color);
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-left: 0.2 rem;
+}
+
+header > nav a:hover {
+    background-color: var(--main-menu-link-bg-color-hover);
+}
+
+header > h1 {
+    margin-top: 0;
+}
+
+/* Legend */
+
+#legend {
+    display: block;
+    margin-top: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    padding: 1rem;
+    border: 1px solid var(--black);
+}
+
+#legend > details > span {
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    width: 80px;
+    display: inline-block;
+    border: 1px solid var(--usecase-tool-border-color);
+    border-radius: var(--standard-border-radius);
+    background-color: var(--usecase-tool-bg-color);
+    color: var(--white);
+    text-align: center;
+    font-weight: bold;
+}
+
+#legend > details > span.trial {
+    background-color: var(--yellow);
+}
+
+#legend > details > span.assess {
+    background-color: var(--orange);
+}
+
+#legend details > span.adopt {
+    background-color: var(--green);
+}
+
+#legend > details > span.hold {
+    background-color: var(--red);
+}
+
+#legend > details > span.new {
+    border: 3px dotted var(--usecase-tool-border-color);
+}
+
+/* regular content */
+
+#content {
+    display: block;
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 1rem;
+    padding: 1rem;
+    border: 1px solid var(--general-uc-border-color)
+}
+
+#content > h1 {
+    text-align: center;
+}
+
+/* Container */
+
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    padding: 0.2rem;
+}
+
+#column {
+    flex: 1;
+    box-sizing: border-box;
+    margin: 0.1rem;
+}
+
+#column span {
+    display:block;
+}
+
+.side {
+    text-align: center;
+    line-height: 2rem;
+    font-weight: bold;
+}
+
+.dev-side {
+    background-color: var(--side-dev-bg-color);
+    border: 1px solid var(--side-dev-border-color);
+}
+
+.ops-side {
+    background-color: var(--side-ops-bg-color);
+    border: 1px solid var(--side-ops-border-color);
+}
+
+.step {
+    text-align: center;
+    line-height: 2rem;
+    font-weight: bold;
+}
+
+.dev-step-title {
+    background-color: var(--side-dev-bg-color);
+    border: 1px solid var(--side-dev-border-color);
+}
+
+.ops-step-title {
+    background-color: var(--side-ops-bg-color);
+    border: 1px solid var(--side-ops-border-color);
+}
+
+/* Boxes */
+
+#usecase > details {
+    padding: 0.5rem;
+    font-weight: bold;
+    background-color: var(--general-uc-bg-color);
+    border: 1px solid var(--general-uc-border-color);
+    border-radius: var(--standard-border-radius);
+    margin-top: 0.5rem;
+}
+
+#usecase > details > a:link,
+#usecase > details > a:visited {
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    display: block;
+    text-decoration: none;
+    border: 1px solid var(--usecase-tool-border-color);
+    border-radius: var(--standard-border-radius);
+    background-color: var(--usecase-tool-bg-color);
+    color: var(--white);
+    text-align: center;
+}
+
+#usecase > details > a:hover {
+    filter: brightness(120%);
+}
+
+/* change colors according to state */
+
+#usecase > details > a.trial {
+    background-color: var(--yellow);
+}
+
+#usecase > details > a.assess {
+    background-color: var(--orange);
+}
+
+#usecase details > a.adopt {
+    background-color: var(--green);
+}
+
+#usecase > details > a.hold {
+    background-color: var(--red);
+}
+
+#usecase > details > a.new {
+    border: 3px dotted var(--usecase-tool-border-color);
+}
+
+/* footer */
+
+#footer {
+    display: block;
+    margin-top: 2rem;
+    background-color: var(--footer-bg-color);
+    padding: 0.5rem;
+    font-size: smaller;
+    color: var(--footer-font-color);
+    line-height: 3.5rem;
+}
+
+#footer > a:link,
+#footer > a:visited {
+    color: var(--footer-link-color);
+}
+
+#footer > a:hover {
+    filter: brightness(20%);
+}

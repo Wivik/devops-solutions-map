@@ -1,0 +1,50 @@
+{% extends 'base.html.j2' %}
+
+{% block content %}
+
+<div id="container">
+    {% for side in devops_content.sides %}
+    <div id="column">
+            <span class="side {{ side.name }}-side">{{ side.name|capitalize }}</span>
+
+            <div id="container">
+
+            {% for steps in side.steps %}
+                <div id="column">
+                        <span class="step {{ side.name }}-step-title">{{ steps.name|capitalize }}</span>
+
+                        {% for usecases in steps.usecases %}
+                        <div id="usecase">
+                            <details{% if request.args['open'] and request.args['open'] == 'all' %} open{% endif %}>
+                                <summary>{{ usecases.name }}</summary>
+                                {% for tool in usecases.tools %}
+                                    <a href="{{ url_for('tool_view', tool=tool.name) }}" class="{{ tool.state }}{% if tool.isnew %} new{% endif %}">{{ tool.name }}{% if tool.isnew %}✨{% endif %}</a>
+                                {% endfor %}
+                            </details>
+                        </div> <!-- usecase -->
+                        {% endfor %}
+
+                </div> <!-- steps -->
+            {% endfor %}
+
+            </div> <!-- container -->
+
+    </div> <!-- column_large -->
+    {% endfor %}
+</div>
+
+
+<div id="legend">
+    <details>
+        <summary>Legend</summary>
+        <span class="assess">Assess</span> This tool is evaluated for a potential adoption. Not yet trialed but considered for a futur usage.<br />
+        <span class="trial">Trial</span> This tool is considered as promising but not yet widely adopted, the organization is evaluating its value.<br />
+        <span class="adopt">Adopt</span> This tool is the current core model solution for this use-case.<br />
+        <span class="hold">Hold</span> This tools is considered as outdated and no longer relevant. It should not be used anymore.<br />
+        <span class="adopt new">New ✨</span> This tool is a new entry in the radar.<br />
+        <span>None</span> This tools is in an unknown status.
+    </details>
+</div>
+
+
+{% endblock %}

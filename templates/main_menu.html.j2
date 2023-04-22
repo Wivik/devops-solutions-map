@@ -1,0 +1,11 @@
+<h1>DevOps Solutions Map</h1>
+
+<nav>
+    <a href="{{ url_for('main') }}">Home</a>
+    {% if request.args['open'] and request.args['open'] == 'all' %}
+    <a href="{{ url_for('main') }}">Close all Boxes</a>
+    {% else %}
+    <a href="{{ url_for('main', open='all') }}">Open all Boxes</a>
+    {% endif %}
+    <a href="{{ url_for('about') }}">About</a>
+</nav>

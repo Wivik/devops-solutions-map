@@ -1,0 +1,32 @@
+{% extends 'base.html.j2' %}
+
+{% block content %}
+
+<div id="container" style="padding-left:5rem;padding-right:5rem;">
+    <div id="column">
+    <h1>
+    {% if tool_content['name']|default('nope') == 'nope' %}
+    Tool not defined in tools section
+    {% else %}
+    {{ tool_content['name'] }}
+    {% endif %}
+    {% if tool_content['descr'] %}
+    </h1>
+
+    <p>{{ tool_content['descr'] }}</p>
+    {% endif %}
+    </div>
+    <div id="column">
+    <h1>Use cases</h1>
+    {% for usage in tool_usage %}
+        <p>
+        {{ usage.side|capitalize }} &gt;
+        {{ usage.step|capitalize }} &gt;
+        {{ usage.uc|capitalize }} {% if usage.isnew %}✨{% endif %} : {{ usage.state|capitalize }}
+        </p>
+
+    {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

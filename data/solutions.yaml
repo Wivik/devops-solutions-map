@@ -1,0 +1,123 @@
+---
+
+devops:
+  sides:
+    - name: dev
+      steps:
+        - name: plan
+          usecases:
+            - name: Project management
+              tools:
+                - name: Jira
+                  state: adopt
+                  isnew: true
+                - name: GitHub Projects
+                  state: assess
+            - name: Collaboration
+              tools:
+                - name: Slack
+                  state: adopt
+                - name: Discord
+                  state: hold
+
+        - name: code
+          usecases:
+            - name: IDE
+              tools:
+                - name: VSCode
+                  state: adopt
+                  isnew: false
+                - name: IntelliJ
+                  state: hold
+                - name: Vim
+                  state: trial
+            - name: Lint
+              tools:
+                - name: Language-oriented Linter
+                  state: assess
+                - name: Sonarlinter
+                  state: adopt
+            - name: Software Composition Analysis
+              tools:
+                - name: GitHub Dependabot
+                  state: adopt
+
+        - name: build
+          usecases:
+            - name: Continuous Integration
+              tools:
+                - name: GitHub Actions
+                  state: assess
+                - name: GitLab CI
+                  state: hold
+            - name: Static Code Analysis
+              tools:
+                - name: SonarQube
+                  state: adopt
+
+        - name: test
+          usecases:
+            - name: Automated testing
+              tools:
+                - name: Selenium
+                  state: adopt
+            - name: Load testing
+              tools:
+                - name: JMeter
+                  state: assess
+
+    - name: ops
+      steps:
+        - name: release
+          usecases:
+            - name: Release management
+              tools:
+                - name: Nexus
+                  state: adopt
+
+        - name: deploy
+          usecases:
+            - name: Virtual Machine deployment
+              tools:
+                - name: Ansible
+                  state: trial
+            - name: Kubernetes Deployment
+              tools:
+                - name: Rancher
+                  state: hold
+                - name: Argo-CD
+                  state: adopt
+
+        - name: operate
+          usecases:
+            - name: ITSM
+              tools:
+                - name: ServiceNow
+                  state: adopt
+            - name: Job scheduler
+              tools:
+                - name: IBM Workload Automation
+                  state: hold
+                - name: Cron
+                  state: adopt
+
+        - name: monitor
+          usecases:
+            - name: Application performance
+              tools:
+                - name: Datadog
+                  state: adopt
+            - name: Monitoring
+              tools:
+                - name: Nagios
+                  state: assess
+
+tools:
+  - name: VSCode
+    descr: blah
+  - name: Jira
+    descr: blah
+  - name: truc3
+    descr: blah
+
+
