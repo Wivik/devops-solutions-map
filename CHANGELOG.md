@@ -1,4 +1,13 @@
-# 0.1.0 (2023-04-22)
+# [0.2.0](https://github.com/Wivik/devops-solutions-map/compare/v0.1.0...v0.2.0) (2023-04-22)
+
+
+### Features
+
+* added about page :sparkles: ([29bec3f](https://github.com/Wivik/devops-solutions-map/commit/29bec3fa36d6cd801ee99f180a35128a67c146a0))
+
+
+
+# [0.1.0](https://github.com/Wivik/devops-solutions-map/compare/fdcab38e43f6d1648bb2680fe9745fc703240372...v0.1.0) (2023-04-22)
 
 
 ### Features
