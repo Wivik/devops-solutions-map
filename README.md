@@ -10,13 +10,29 @@ This tool has been inspired by the various tech radar approach.
 
 The application is available as a container image you may host and run. The data are formatted using a YAML file that will be rendered by the web application. The content is rendered using the file items order.
 
-Basic run example :
+### Basic container with volume run
+
+Basic run example, where `version` is the latest [available version](https://github.com/users/Wivik/packages/container/package/devops-solutions-map) :
 
 ```bash
-
-podman run -v ./data:/data:Z ghcr.io/Wivik/devops-solutions-maps:latest
+podman run -v ./data:/data:Z ghcr.io/wivik/devops-solutions-maps:(version)
 
 ```
+
+### With built-in assets
+
+You can use your company brand logo instead of the project's by replacing the `static/img/logo.png` file in the image's content. Also the `solutions.yaml` file can be integrated in this way too.
+
+Basic Containerfile example :
+
+```Dockerfile
+FROM ghcr.io/wivik/devops-solutions-maps:(version)
+
+COPY mylogo.png /devops-map/static/img/logo.png
+COPY solutions.yaml /devops-map/data/solutions.yaml
+
+```
+
 
 ## Data file format
 
