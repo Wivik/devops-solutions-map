@@ -1,3 +1,12 @@
+## [0.2.1](https://github.com/Wivik/devops-solutions-map/compare/v0.2.0...v0.2.1) (2023-04-23)
+
+
+### Bug Fixes
+
+* :zap: remove useless files in container ([6e7426b](https://github.com/Wivik/devops-solutions-map/commit/6e7426bc640bd35c971613dbc28fbce0e19a1eeb))
+
+
+
 # [0.2.0](https://github.com/Wivik/devops-solutions-map/compare/v0.1.0...v0.2.0) (2023-04-22)
 
 
