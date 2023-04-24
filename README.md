@@ -15,9 +15,11 @@ The application is available as a container image you may host and run. The data
 Basic run example, where `version` is the latest [available version](https://github.com/users/Wivik/packages/container/package/devops-solutions-map) :
 
 ```bash
-podman run -v ./data:/data:Z ghcr.io/wivik/devops-solutions-maps:(version)
+podman run -v ./data:/data:Z ghcr.io/wivik/devops-solutions-map:(version)
 
 ```
+
+Note : you may also use Docker instead of Pdoman, of course.
 
 ### With built-in assets
 
