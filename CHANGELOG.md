@@ -1,3 +1,14 @@
+## [0.2.2](https://github.com/Wivik/devops-solutions-map/compare/v0.2.1...v0.2.2) (2023-04-24)
+
+
+### Bug Fixes
+
+* :pencil: another typo in readme ([e10e025](https://github.com/Wivik/devops-solutions-map/commit/e10e025c689b0fd1bbf8981bb8f03618daf24dc6))
+* :pencil: change the title tag content ([b001715](https://github.com/Wivik/devops-solutions-map/commit/b0017159419b32675dfe399105be76ff5d04a8ef))
+* missing markdown in requirement closes [#2](https://github.com/Wivik/devops-solutions-map/issues/2) ([b9ba9af](https://github.com/Wivik/devops-solutions-map/commit/b9ba9af8eff769968ff35243dd6776cf117a01e3))
+
+
+
 ## [0.2.1](https://github.com/Wivik/devops-solutions-map/compare/v0.2.0...v0.2.1) (2023-04-23)
 
 
