@@ -16,6 +16,9 @@ on:
       - '.sonarcloud.properties'
       - 'data/**'
 
+env:
+  REGISTRY: ghcr.io
+
 jobs:
   pullrequest:
     runs-on: ubuntu-latest
@@ -28,6 +31,6 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: false
-          tags: "${{ env.REGISTRY }}/wivik/devops-solutions-map:${{ github.run_number }}"
+          tags: "${{ env.REGISTRY }}/wivik/devops-solutions-map:${{ github.sha }}"
           file: Containerfile
           context: .
