@@ -4,16 +4,30 @@ on:
   pull_request:
     paths-ignore:
       - '.github/**'
+      - '*.md'
+      - '.sonarcloud.properties'
+      - 'data/**'
   push:
     branches:
       - main
     paths-ignore:
       - '.github/**'
+      - '.md'
+      - '.sonarcloud.properties'
+      - 'data/**'
 
 jobs:
   pullrequest:
-    permissions:
-      contents: write
-      packages: write
-    if: ${{ github.actor != 'dependabot[bot]' }}
-    uses: Wivik/devops-solutions-map/.github/workflows/release.yml@main
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Build and push
+        uses: docker/build-push-action@v4
+        with:
+          push: false
+          tags: "${{ env.REGISTRY }}/wivik/devops-solutions-map:${{ github.run_number }}"
+          file: Containerfile
+          context: .
