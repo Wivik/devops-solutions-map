@@ -19,7 +19,7 @@ podman run -v ./data:/data:Z ghcr.io/wivik/devops-solutions-map:(version)
 
 ```
 
-Note : you may also use Docker instead of Pdoman, of course.
+Note : you may also use Docker instead of Podman, of course.
 
 ### With built-in assets
 
