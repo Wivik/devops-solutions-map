@@ -19,9 +19,13 @@ on:
 env:
   REGISTRY: ghcr.io
 
+
 jobs:
   pullrequest:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
 
       - name: Checkout code
