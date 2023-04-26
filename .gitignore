@@ -160,5 +160,5 @@ cython_debug/
 #.idea/
 
 *.md.backup
-
+data/**
 .vscode
