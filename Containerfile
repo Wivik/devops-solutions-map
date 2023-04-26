@@ -18,5 +18,5 @@ WORKDIR /devops-map
 
 ENV FLASK_APP=app.py
 
-ENTRYPOINT [ "python", "app.py", "--host", "0.0.0.0", "--port", "8080" ]
+ENTRYPOINT [ "python", "app.py", "--host", "0.0.0.0", "--port", "5000" ]
 
