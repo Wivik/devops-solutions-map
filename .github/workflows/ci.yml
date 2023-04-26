@@ -30,7 +30,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
-          push: false
+          push: true
           tags: "${{ env.REGISTRY }}/wivik/devops-solutions-map:${{ github.sha }}"
           file: Containerfile
           context: .
