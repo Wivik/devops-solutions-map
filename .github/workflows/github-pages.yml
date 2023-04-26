@@ -35,6 +35,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          ref: feat/static-website
       - name: Install requirement
         run: pip install -r requirements.txt
       - name: Generate static content  
