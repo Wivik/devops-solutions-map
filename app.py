@@ -1,14 +1,14 @@
 from flask import Flask
 from flask import render_template, request, redirect, url_for, flash, session
+from flask_frozen import Freezer
 from flask_wtf.csrf import CSRFProtect
+import argparse
+import json
 import markdown
 import os
 import pathlib
 import sys
 import yaml
-import json
-from flask_frozen import Freezer
-import argparse
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(32)
@@ -20,6 +20,8 @@ freezer = Freezer(app)
 arg_parser = argparse.ArgumentParser()
 arg_parser.add_argument('-f', '--freeze', dest='freeze_mode', action='store_true', default=False, help='Produce a static website instead of starting the web server')
 arg_parser.add_argument('-d', '--debug', dest='debug', action='store_true', default=False, help='Enable Flask debug mode')
+arg_parser.add_argument('--host', dest='host', action='store', default='127.0.0.1', help='Host exposition. Set 0.0.0.0 for outside localhost.')
+arg_parser.add_argument('-p', '--port', dest='port', action='store', default='5000', help='Expose port (default 5000)')
 args = arg_parser.parse_args()
 
 ## solutions file is expected to be an env var
@@ -136,4 +138,4 @@ if __name__ == '__main__':
     if args.freeze_mode:
         freezer.freeze()
     else:
-        Flask.run(app, debug=args.debug)
+        Flask.run(app, debug=args.debug, port=args.port, host=args.host)
