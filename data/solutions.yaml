@@ -114,7 +114,17 @@ devops:
 
 tools:
   - name: VSCode
-    descr: blah
+    descr: |
+      A tool made by microsoft
+
+      [url](http://blabla)
+
+      ## hello !
+
+      - list
+      - list
+      - list
+      - list
   - name: Jira
     descr: blah
   - name: truc3

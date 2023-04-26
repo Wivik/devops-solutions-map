@@ -13,7 +13,7 @@
     {% if tool_content['descr'] %}
     </h1>
 
-    <p>{{ tool_content['descr'] }}</p>
+    <p>{{ tool_content['descr'] | markdown }}</p>
     {% endif %}
     </div>
     <div id="column">
