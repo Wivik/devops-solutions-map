@@ -22,6 +22,7 @@ arg_parser.add_argument('-f', '--freeze', dest='freeze_mode', action='store_true
 arg_parser.add_argument('-d', '--debug', dest='debug', action='store_true', default=False, help='Enable Flask debug mode')
 arg_parser.add_argument('--host', dest='host', action='store', default='127.0.0.1', help='Host exposition. Set 0.0.0.0 for outside localhost.')
 arg_parser.add_argument('-p', '--port', dest='port', action='store', default='5000', help='Expose port (default 5000)')
+arg_parser.add_argument('--freezer-base-url', dest='freezer_base_url', action='store', default=None, help='Set FREEZER_BASE_URL setting, required if the static website is not at the root of the domain name.')
 args = arg_parser.parse_args()
 
 ## solutions file is expected to be an env var
@@ -43,6 +44,9 @@ if not os.path.exists(data_path):
     except:
         print('Could not create data dir')
         raise
+
+if args.freezer_base_url is not None:
+    app.config['FREEZER_BASE_URL'] = args.freezer_base_url
 
 ## here we go
 
