@@ -8,7 +8,6 @@ import sys
 import yaml
 import json
 
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(32)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
@@ -38,6 +37,12 @@ if not os.path.exists(data_path):
 
 
 ## here we go
+
+def markdown_filter(text):
+    return markdown.markdown(text, extensions=['markdown.extensions.tables', 'markdown.extensions.fenced_code', 'markdown.extensions.codehilite'])
+
+app.jinja_env.filters['markdown'] = markdown_filter
+
 
 def test_solutions_file(solutions_file):
     if os.path.exists(solutions_file):

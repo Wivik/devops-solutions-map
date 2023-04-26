@@ -70,7 +70,7 @@ tools:
     descr: blah
   - name: Jira
     descr: blah
- 
+
 ```
 
 For example, if you declare `GitHub` in the `devops` section, but not in the `tools` section, the tool description will be incomplete. However, the tool's page will remain able to display the tool's usages.
@@ -79,5 +79,24 @@ For example, if you declare `GitHub` in the `devops` section, but not in the `to
 | ---  | ----- | --------- | ------- | ----------- |
 | `tools` | - | Yes | - | The top level of the `tools` section |
 | `tools.name` | `string` | Yes | `None` | The tool's name, must match the name declared in the use cases. |
-| `tools.descr` | `string` | No | `None` | The tool's description. |
+| `tools.descr` | `string` | No | `None` | The tool's description. [Markdown](https://www.markdownguide.org/basic-syntax/) is supported. |
 
+You can use YAML's text block for description if required.
+
+Example :
+
+```yaml
+tools:
+  - name: VSCode
+    descr: |
+      A tool made by microsoft
+
+      [url](http://hello)
+
+      ## hello !
+
+      - list
+      - list
+      - list
+      - list
+```
