@@ -35,10 +35,10 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Generate sample content
-        run: |
-          pip install -r requirements.txt && \
-          python app.py --freeze
+      - name: Install requirement
+        run: pip install -r requirements.txt
+      - name: Generate static content  
+        run: python app.py --freeze
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
