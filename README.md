@@ -10,7 +10,7 @@ Instead of focusing on tools, this chart displays at first the DevOps delivery s
 
 For more information about why I prefer a view displaying the use cases instead of a tools-oriented tech radar, you can read this article I've wrote on my blog [The importance of the methodology over the tools](https://blog.zedas.fr/posts/the-importance-of-the-methodology/).
 
-## Usage{#usage}
+## Usage
 
 This tool can be used in two different ways. 
 
@@ -18,19 +18,19 @@ For both ways, the data displayed is formatted using a YAML file that will be re
 
 Please refer the [Data format](data-format.md) documentation for more details.
 
-### Command-line arguments{#cli}
+### Command-line arguments
 
 By default, running the container or the `app.py` script (see below) will start the Flask server on localhost and serve the application on port 5000. Some options are available.
 
 | Argument | Mandatory | Default | Description |
 | ----------- | ----------- | --------- | ------------- |
 | `-d` <br />  `--debug` | No | `False` | Enable Flask's debug mode |
-| `-f` <br /> `--freeze` | No | ` False` | Run the application as a static website generator instead of serving it. See [Static site mode](#static-website-mode) for mode details. |
+| `-f` <br /> `--freeze` | No | ` False` | Run the application as a static website generator instead of serving it. See [Static site mode](#static-website-generator-mode) for mode details. |
 | `--freezer-base-url` | No | `None` | Related to `--freeze`.<br>Use this option if the website is not at the root of the domain name.<br><br>Example for GitHub Pages :<br>`--freezer-base-url "https://username.github.io/my-website"` |
 | `--host` | No | `127.0.0.1` | Use this option to expose the webserver outside localhost.<br><br>Note : The Container runs the application with `--host "0.0.0.0"` |
 | `-p`<br>`--port` | No | `5000` | Change the listen port to the provided value.<br>By default, the container will set this option to `5000` |
 
-### Run from sources{#run-from-sources}
+### Run from sources
 
 1. Clone the repository
 
@@ -59,7 +59,7 @@ python app.py
 ```
 
 
-### Run with a Container (Podman, Docker){#run-with-container}
+### Run with a Container (Podman, Docker)
 
 The application is available as a container image you may host and run in any Docker-compatible runtime.
 
@@ -76,7 +76,7 @@ Note : you may also use Docker instead of Podman, of course.
 
 Since the `/devops-map/data` path in the container is the data source, you can use any available binding to feed the content : a mounted storage, a volume, whatever. Please refer to your hosting solution documentation for the recommended architecture.
 
-#### Container run with built-in assets{#run-with-container-assets}
+#### Container run with built-in assets
 
 You can use your company brand logo instead of the project's by replacing the `static/img/logo.png` file in the image's content. Also the `solutions.yaml` file can be integrated in this way too.
 
@@ -92,11 +92,11 @@ COPY solutions.yaml /devops-map/data/solutions.yaml
 
 Then, run the container in the same way.
 
-### Static website generator mode{#static-website-mode}
+### Static website generator mode
 
 Instead of starting a web server, DevOps Solutions Map can also produce static HTML files you can host on any web hosting service.
 
-#### Generate static website using the sources{#generate-static-website}
+#### Generate static website using the sources
 
 Setup the virtualenv and the dependencies with the same method as described in [run from the sources](#run-from-sources)
 
@@ -122,17 +122,17 @@ python -m http.server 8080
 
 Then, go to `http://localhost:8080` to check the result.
 
-## Data file format{#data-file-format}
+## Data file format
 
 Please refer to the [dedicated documentation](data-format.md).
 
-## Contribute{#contribute}
+## Contribute
 
 Fork the project, create a branch, open a Pull Request.
 
 Please ensure you're using the [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/) specification for changelog generation.
 
-## License{#license}
+## License
 
 This project is licensed under MIT.
 
