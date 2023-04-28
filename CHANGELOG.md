@@ -1,3 +1,20 @@
+# [0.3.0](https://github.com/Wivik/devops-solutions-map/compare/v0.2.2...v0.3.0) (2023-04-28)
+
+
+### Bug Fixes
+
+* add freezer base url option ([40fb763](https://github.com/Wivik/devops-solutions-map/commit/40fb7632bd629c475d989302768e809cae032cc6))
+* wrong port in container ([c06e99d](https://github.com/Wivik/devops-solutions-map/commit/c06e99da00a92a2c68cfb810daa462b8cfe2cb19))
+
+
+### Features
+
+* static site generator mode :sparkles: closes [#3](https://github.com/Wivik/devops-solutions-map/issues/3) ([74eb682](https://github.com/Wivik/devops-solutions-map/commit/74eb6823555cfde6e87d925f21a62f45538fc740))
+* support markdown in description closes [#8](https://github.com/Wivik/devops-solutions-map/issues/8) :sparkles: ([40f246b](https://github.com/Wivik/devops-solutions-map/commit/40f246bed35dbab8e230939875b71fc51068343f))
+* update containerfile for static mode :sparkles: ([425a388](https://github.com/Wivik/devops-solutions-map/commit/425a388ffefa8e98e7a0b46ec9994bb925e3971c))
+
+
+
 ## [0.2.2](https://github.com/Wivik/devops-solutions-map/compare/v0.2.1...v0.2.2) (2023-04-24)
 
 
