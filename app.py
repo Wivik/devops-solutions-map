@@ -1,18 +1,29 @@
 from flask import Flask
 from flask import render_template, request, redirect, url_for, flash, session
+from flask_frozen import Freezer
 from flask_wtf.csrf import CSRFProtect
+import argparse
+import json
 import markdown
 import os
 import pathlib
 import sys
 import yaml
-import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(32)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 csrf = CSRFProtect()
 csrf.init_app(app)
+freezer = Freezer(app)
+
+arg_parser = argparse.ArgumentParser()
+arg_parser.add_argument('-d', '--debug', dest='debug', action='store_true', default=False, help='Enable Flask debug mode')
+arg_parser.add_argument('-f', '--freeze', dest='freeze_mode', action='store_true', default=False, help='Produce a static website instead of starting the web server')
+arg_parser.add_argument('--freezer-base-url', dest='freezer_base_url', action='store', default=None, help='Set FREEZER_BASE_URL setting, required if the static website is not at the root of the domain name.')
+arg_parser.add_argument('--host', dest='host', action='store', default='127.0.0.1', help='Host exposition. Set 0.0.0.0 for outside localhost.')
+arg_parser.add_argument('-p', '--port', dest='port', action='store', default='5000', help='Expose port (default 5000)')
+args = arg_parser.parse_args()
 
 ## solutions file is expected to be an env var
 ## defaulting to solutions.yaml
@@ -29,12 +40,13 @@ solutions_file = os.path.join(data_path, solutions_file_name)
 if not os.path.exists(data_path):
     print('Data path missing, creating directory')
     try:
-        os.path.mkdir(data_path)
+        os.mkdir(data_path)
     except:
         print('Could not create data dir')
         raise
 
-
+if args.freezer_base_url is not None:
+    app.config['FREEZER_BASE_URL'] = args.freezer_base_url
 
 ## here we go
 
@@ -94,7 +106,7 @@ def main(side=None, step=None):
 
     return render_template('main.html.j2', devops_content=devops_content)
 
-@app.route("/tool/<string:tool>")
+@app.route("/tool/<string:tool>.html")
 def tool_view(tool):
 
     if not test_solutions_file(solutions_file):
@@ -111,7 +123,7 @@ def tool_view(tool):
 
     return render_template('tool.html.j2', tool_content=tool_content, tool_usage=tool_usage)
 
-@app.route("/about")
+@app.route("/about.html")
 def about():
 
     changelog = open(os.path.join(app_path, 'CHANGELOG.md'), 'r')
@@ -125,3 +137,9 @@ def about():
     version = str(version['version'])
 
     return render_template('about.html.j2', changelog_content=changelog_content, version=version, data_spec=data_spec)
+
+if __name__ == '__main__':
+    if args.freeze_mode:
+        freezer.freeze()
+    else:
+        Flask.run(app, debug=args.debug, port=args.port, host=args.host)
