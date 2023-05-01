@@ -1,3 +1,18 @@
+# [0.4.0](https://github.com/Wivik/devops-solutions-map/compare/v0.3.0...v0.4.0) (2023-05-01)
+
+
+### Bug Fixes
+
+* wrong place for the description :memo: ([0f5f43f](https://github.com/Wivik/devops-solutions-map/commit/0f5f43f859ab89f4212175264f12665d4da77139))
+* wrong place for the description :memo: ([4188dbe](https://github.com/Wivik/devops-solutions-map/commit/4188dbe79bb5e88efa9d892266afed0e73804830))
+
+
+### Features
+
+* better tool and use case view closes [#9](https://github.com/Wivik/devops-solutions-map/issues/9) closes [#10](https://github.com/Wivik/devops-solutions-map/issues/10) ([51db5aa](https://github.com/Wivik/devops-solutions-map/commit/51db5aa446967873f65d648c4e82a87b176c4d9f))
+
+
+
 # [0.3.0](https://github.com/Wivik/devops-solutions-map/compare/v0.2.2...v0.3.0) (2023-04-28)
 
 
@@ -41,17 +56,6 @@
 ### Features
 
 * added about page :sparkles: ([29bec3f](https://github.com/Wivik/devops-solutions-map/commit/29bec3fa36d6cd801ee99f180a35128a67c146a0))
-
-
-
-# [0.1.0](https://github.com/Wivik/devops-solutions-map/compare/fdcab38e43f6d1648bb2680fe9745fc703240372...v0.1.0) (2023-04-22)
-
-
-### Features
-
-* first commit :sparkles: ([fdcab38](https://github.com/Wivik/devops-solutions-map/commit/fdcab38e43f6d1648bb2680fe9745fc703240372))
-* init readme :sparkles: ([bd6fae0](https://github.com/Wivik/devops-solutions-map/commit/bd6fae0d7a1761c3947eacad5a3ac723e6bb35ae))
-* readme, gitignore, css tweak ([e356a1b](https://github.com/Wivik/devops-solutions-map/commit/e356a1bd43972132c11fbac756573d798c5183d0))
 
 
 
