@@ -80,6 +80,12 @@ For example, if you declare `GitHub` in the `devops` section, but not in the `to
 | `tools` | - | Yes | - | The top level of the `tools` section |
 | `tools.name` | `string` | Yes | `None` | The tool's name, must match the name declared in the use cases. |
 | `tools.descr` | `string` | No | `None` | The tool's description. [Markdown](https://www.markdownguide.org/basic-syntax/) is supported. |
+| `tools.links` | - | - | - | Top level of the links section |
+| `tools.links.name` | `string` | No | `None` | The link name (ex : Official website, CMDB reference, app registry reference...) |
+| `tools.links.url` | `string` | No | `None` | The URL for the link. |
+| `tools.tags` | - | - | - | Top level of the tags section |
+| `tools.tags.name` | `string` | No | `None` | The tag name (ex : License, Owner, etc) |
+| `tools.tags.value` | `string` | No | `None` | The tag's value |
 
 You can use YAML's text block for description if required.
 
@@ -88,15 +94,16 @@ Example :
 ```yaml
 tools:
   - name: VSCode
+    links:
+      - name: Official website
+        url: https://code.visualstudio.com
+      - name: Application Registry
+        url: https://link-to-your-app-registry
+    tags:
+      - name: License
+        value: MIT for Source code, Microsoft proprietary for binaries
     descr: |
-      A tool made by microsoft
+      Visual Studio Code, also commonly referred to as VS Code, is a source-code editor made by Microsoft with the Electron Framework, for Windows, Linux and macOS. Features include support for debugging, syntax highlighting, intelligent code completion, snippets, code refactoring, and embedded Git. Users can change the theme, keyboard shortcuts, preferences, and install extensions that add functionality.
 
-      [url](http://hello)
-
-      ## hello !
-
-      - list
-      - list
-      - list
-      - list
+      [Wikipedia](https://en.wikipedia.org/wiki/Visual_Studio_Code)
 ```

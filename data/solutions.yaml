@@ -7,6 +7,10 @@ devops:
         - name: plan
           usecases:
             - name: Project management
+              descr: |
+                Project management is the process of leading the work of a team to achieve all project goals within the given constraints. This information is usually described in project documentation, created at the beginning of the development process. The primary constraints are scope, time, and budget. The secondary challenge is to optimize the allocation of necessary inputs and apply them to meet pre-defined objectives.
+
+                [Wikipedia](https://en.wikipedia.org/wiki/Project_management)
               tools:
                 - name: Jira
                   state: adopt
@@ -114,20 +118,39 @@ devops:
 
 tools:
   - name: VSCode
+    links:
+      - name: Official website
+        url: https://code.visualstudio.com
+      - name: Application Registry
+        url: https://link-to-your-app-registry
+    tags:
+      - name: License
+        value: MIT for Source code, Microsoft proprietary for binaries
+      - name: Type
+        value: Workstation software
+      - name: Publisher
+        value: Microsoft
     descr: |
-      A tool made by microsoft
+      Visual Studio Code, also commonly referred to as VS Code, is a source-code editor made by Microsoft with the Electron Framework, for Windows, Linux and macOS. Features include support for debugging, syntax highlighting, intelligent code completion, snippets, code refactoring, and embedded Git. Users can change the theme, keyboard shortcuts, preferences, and install extensions that add functionality.
 
-      [url](http://blabla)
-
-      ## hello !
-
-      - list
-      - list
-      - list
-      - list
+      [Wikipedia](https://en.wikipedia.org/wiki/Visual_Studio_Code)
   - name: Jira
-    descr: blah
-  - name: truc3
-    descr: blah
+    links:
+      - name: Official website
+        url: https://www.atlassian.com/software/jira
+      - name: Application Registry
+        url: https://link-to-your-app-registry
+    tags:
+      - name: License
+        value: Proprietary
+      - name: Type
+        value: SaaS
+      - name: Publisher
+        value: Atlassian
+    descr: |
+      Jira is a proprietary issue tracking product developed by Atlassian that allows bug tracking and agile project management.
+
+      [Wikipedia](https://en.wikipedia.org/wiki/Jira_(software))
+
 
 
