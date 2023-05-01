@@ -35,7 +35,7 @@ devops:
 | ` devops.sides.steps.name` | `string` | Yes | `plan` / `code` / `build` / `test` / `release` / `deploy` / `operate` / `monitor` | The label for the steps. This label is automatically capitalized. |
 | ` devops.sides.name` | `string` | Yes | `dev` | The label for the Dev section. This label is automatically capitalized. |
 | ` devops.sides.steps.usecases` | - | Yes | - | The top level for the usecases section. |
-| ` devops.sides.steps.usescases.description` | `string` | No | `None` | The description of the use-case.<br>[Markdown](https://www.markdownguide.org/basic-syntax/) is supported. |
+| ` devops.sides.steps.usescases.descr` | `string` | No | `None` | The description of the use-case.<br>[Markdown](https://www.markdownguide.org/basic-syntax/) is supported. |
 | ` devops.sides.usecases.name` | `string` | Yes | `None` | The use case name. |
 | ` devops.sides.usecases.tools` | - | Yes | - | The top level for the use cases' tools. |
 | ` devops.sides.usecases.tools.name` | `string` | Yes | `None` | The tool's name. |
