@@ -185,7 +185,7 @@ header > h1 {
 #column {
     flex: 1;
     box-sizing: border-box;
-    margin: 0.1rem;
+    margin: 0.3rem;
 }
 
 #column span {
@@ -236,7 +236,10 @@ header > h1 {
 }
 
 #usecase > details > a:link,
-#usecase > details > a:visited {
+#usecase > details > a:visited,
+#column > a:link,
+#column > a:visited,
+#column > span.legend {
     padding: 0.5rem;
     margin-top: 0.5rem;
     display: block;
@@ -254,24 +257,43 @@ header > h1 {
 
 /* change colors according to state */
 
-#usecase > details > a.trial {
+#usecase > details > a.trial,
+#column > a.trial,
+#column > span.trial {
     background-color: var(--yellow);
 }
 
-#usecase > details > a.assess {
+#usecase > details > a.assess,
+#column > a.assess,
+#column > span.assess {
     background-color: var(--orange);
 }
 
-#usecase details > a.adopt {
+#usecase details > a.adopt,
+#column > a.adopt,
+#column > span.adopt {
     background-color: var(--green);
 }
 
-#usecase > details > a.hold {
+#usecase > details > a.hold,
+#column > a.hold,
+#column > span.hold {
     background-color: var(--red);
 }
 
-#usecase > details > a.new {
+#usecase > details > a.new,
+#column > a.new,
+#column > span.new {
     border: 3px dotted var(--usecase-tool-border-color);
+}
+
+#usecase > details > a.about-use-case {
+    border: 1px dotted var(--usecase-tool-border-color);
+    line-height: 1rem;
+    font-size: smaller;
+    font-weight: normal;
+    background-color: var(--general-uc-bg-color);
+    color: var(--black)
 }
 
 /* footer */

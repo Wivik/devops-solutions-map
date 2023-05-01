@@ -1,0 +1,23 @@
+{% extends 'base.html.j2' %}
+
+{% block content %}
+
+<div id="container" style="padding-left:5rem;padding-right:5rem;">
+    <div id="column">
+    <h1>
+    {{ usecase_content['name'] }}
+    </h1>
+    {% if usecase_content['descr'] %}
+
+    <p>{{ usecase_content['descr'] | markdown }}</p>
+    {% endif %}
+    </div>
+    <div id="column">
+    <h1>Tools</h1>
+    {% for tool in usecase_content['tools'] %}
+        <a href="{{ url_for('tool_view', tool=tool.name) }}" class="{{ tool['state'] }}{% if tool.isnew %} new{% endif %}" style="width:60%;">{{ tool['name'] }}{% if tool.isnew %} ✨{% endif %}</a>
+    {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

@@ -123,6 +123,25 @@ def tool_view(tool):
 
     return render_template('tool.html.j2', tool_content=tool_content, tool_usage=tool_usage)
 
+@app.route("/side/<string:side>/step/<string:step>/usecase/<string:usecase>.html")
+def usecase_view(side, step, usecase=None):
+
+    if not test_solutions_file(solutions_file):
+        return render_template('no-file.html.j2')
+
+    usecase_content = []
+    solutions_content = read_solutions(solutions_file)
+    devops_content = solutions_content['devops']
+    for side_content in devops_content['sides']:
+        if side_content['name'] == side:
+            for step_content in side_content['steps']:
+                if step_content['name'] == step:
+                    for uc_content in step_content['usecases']:
+                        if uc_content['name'] == usecase:
+                            usecase_content = uc_content
+
+    return render_template('usecase.html.j2', usecase_content=usecase_content)
+
 @app.route("/about.html")
 def about():
 

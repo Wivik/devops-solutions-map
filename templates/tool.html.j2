@@ -19,13 +19,29 @@
     <div id="column">
     <h1>Use cases</h1>
     {% for usage in tool_usage %}
-        <p>
+        <a href="{{ url_for('usecase_view', usecase=usage.uc, side=usage.side, step=usage.step) }}" class="{{  usage.state|default('unknown') }}{% if usage.isnew %} new{% endif %}" style="width:60%;">
         {{ usage.side|capitalize }} &gt;
         {{ usage.step|capitalize }} &gt;
-        {{ usage.uc|capitalize }} {% if usage.isnew %}✨{% endif %} : {{ usage.state|capitalize|default('unknown') }}
-        </p>
+        {{ usage.uc }}{% if usage.isnew %} ✨{% endif %}
+        </a>
 
     {% endfor %}
+    {% if tool_content['links']|default('nope') != 'nope' %}
+    <h1>Links</h1>
+        <ul>
+        {% for link in tool_content['links'] %}
+            <li><a href="{{ link['url'] }}" target="_blank">{{ link['name'] }}</a></li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+    {% if tool_content['tags']|default('nope') != 'nope' %}
+    <h1>Tags</h1>
+        <ul>
+        {% for tag in tool_content['tags'] %}
+            <li>{{ tag['name'] }} : {{ tag['value'] }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
     </div>
 </div>
 
