@@ -32,6 +32,7 @@ devops:
 | `devops.sides` | - | Yes | - | The top level of the `sides` section |
 | ` devops.sides.name` | `string` | Yes | `dev` | The label for the Dev section. This label is automatically capitalized. |
 | ` devops.sides.steps` | - | Yes | - | The top level of the `steps` section |
+| ` devops.sides.steps.description` | `string` | No | `None` | The description of the use-case.<br>[Markdown](https://www.markdownguide.org/basic-syntax/) is supported. |
 | ` devops.sides.steps.name` | `string` | Yes | `plan` / `code` / `build` / `test` / `release` / `deploy` / `operate` / `monitor` | The label for the steps. This label is automatically capitalized. |
 | ` devops.sides.name` | `string` | Yes | `dev` | The label for the Dev section. This label is automatically capitalized. |
 | ` devops.sides.steps.usecases` | - | Yes | - | The top level for the usecases section. |
@@ -79,7 +80,7 @@ For example, if you declare `GitHub` in the `devops` section, but not in the `to
 | ---  | ----- | --------- | ------- | ----------- |
 | `tools` | - | Yes | - | The top level of the `tools` section |
 | `tools.name` | `string` | Yes | `None` | The tool's name, must match the name declared in the use cases. |
-| `tools.descr` | `string` | No | `None` | The tool's description. [Markdown](https://www.markdownguide.org/basic-syntax/) is supported. |
+| `tools.descr` | `string` | No | `None` | The tool's description.<br>[Markdown](https://www.markdownguide.org/basic-syntax/) is supported. |
 | `tools.links` | - | - | - | Top level of the links section |
 | `tools.links.name` | `string` | No | `None` | The link name (ex : Official website, CMDB reference, app registry reference...) |
 | `tools.links.url` | `string` | No | `None` | The URL for the link. |
