@@ -46,7 +46,7 @@ class TestApp(unittest.TestCase):
         self.assertTrue(os.path.exists(os.path.join(app.config['FREEZER_DESTINATION'], 'tool', 'VSCode.html')))
 
         # Check that the Project Management use case exists.
-        self.assertTrue(os.path.exists(os.path.join(app.config['FREEZER_DESTINATION'], 'side', 'dev', 'plan', 'usecase', 'Project management.html')))
+        self.assertTrue(os.path.exists(os.path.join(app.config['FREEZER_DESTINATION'], 'side', 'dev', 'step', 'plan', 'usecase', 'Project management.html')))
 
 
 if __name__ == '__main__':
