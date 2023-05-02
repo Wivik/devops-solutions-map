@@ -37,6 +37,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Install requirement
+        run: pip install -r requirements.txt
+
+      - name: Run unit tests
+        run: python test_app.py >> $GITHUB_STEP_SUMMARY
+
       - name: Build and push
         uses: docker/build-push-action@v4
         with:
