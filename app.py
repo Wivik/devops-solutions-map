@@ -162,14 +162,9 @@ def about():
 ## customization
 @app.route("/static/<path:folder>/<path:filename>")
 def custom_static(folder, filename):
-    print(folder)
-    print(filename)
     ## If the asset can be overrided and exists we send it from the data dir
     if filename in authorized_override_assets:
-        print('overrider allowed for ', os.path.join(folder, filename))
         if os.path.isfile(os.path.join(data_path, folder, filename)):
-            print('file exists')
-            print('send ', os.path.join(data_path, folder, filename))
             return send_from_directory(data_path, os.path.join(folder, filename))
     ## if not, we fallback on static dir
     return send_from_directory(app.static_folder, os.path.join(folder, filename))
