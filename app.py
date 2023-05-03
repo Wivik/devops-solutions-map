@@ -33,7 +33,7 @@ if os.environ.get('DEVOPS_SOLUTIONS_FILE'):
 else:
     solutions_file_name = 'solutions.yaml'
 
-app_path = pathlib.Path(__file__).parent.absolute()
+app_path = app.root_path
 data_path = os.path.join(app_path, 'data')
 solutions_file = os.path.join(data_path, solutions_file_name)
 
@@ -164,8 +164,12 @@ def about():
 def custom_static(folder, filename):
     ## If the asset can be overrided and exists we send it from the data dir
     if filename in authorized_override_assets:
-        if os.path.isfile(os.path.join(data_path, folder, filename)):
+        fullpath = os.path.normpath(os.path.join(data_path, folder, filename))
+        if os.path.isfile(fullpath) and fullpath.startswith(data_path):
             return send_from_directory(data_path, os.path.join(folder, filename))
+        else:
+            ## If the file does not exists or somebody mess up with the path, we use the static path
+            return send_from_directory(app.static_folder, os.path.join(folder, filename))
     ## if not, we fallback on static dir
     return send_from_directory(app.static_folder, os.path.join(folder, filename))
 
