@@ -49,6 +49,7 @@ if args.freezer_base_url is not None:
     app.config['FREEZER_BASE_URL'] = args.freezer_base_url
 
 authorized_override_assets = ['style.css', 'custom.css', 'logo.png']
+authorized_override_assets_folders = ['css', 'img']
 
 ## here we go
 
@@ -163,9 +164,11 @@ def about():
 @app.route("/static/<path:folder>/<path:filename>")
 def custom_static(folder, filename):
     ## If the asset can be overrided and exists we send it from the data dir
-    if filename in authorized_override_assets:
+    if folder in authorized_override_assets_folders and filename in authorized_override_assets:
         fullpath = os.path.normpath(os.path.join(data_path, folder, filename))
-        if os.path.isfile(fullpath) and fullpath.startswith(data_path):
+        if not fullpath.startswith(data_path):
+            return send_from_directory(app.static_folder, os.path.join(folder, filename))
+        if os.path.isfile(fullpath):
             return send_from_directory(data_path, os.path.join(folder, filename))
         else:
             ## If the file does not exists or somebody mess up with the path, we use the static path
