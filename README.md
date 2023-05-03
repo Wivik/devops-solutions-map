@@ -12,7 +12,7 @@ For more information about why I prefer a view displaying the use cases instead 
 
 ## Usage
 
-This tool can be used in two different ways. 
+This tool can be used in two different ways.
 
 For both ways, the data displayed is formatted using a YAML file that will be rendered by the web application. The content is rendered using the file items order.
 
@@ -124,7 +124,11 @@ Then, go to `http://localhost:8080` to check the result.
 
 ## Data file format
 
-Please refer to the [dedicated documentation](data-format.md).
+Please refer to the [dedicated documentation](docs/data-format.md).
+
+## Customize
+
+Please refer to the [customize documentation](docs/customize.md).
 
 ## Contribute
 
