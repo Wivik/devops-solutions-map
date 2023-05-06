@@ -35,7 +35,7 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: "${{ env.REGISTRY }}/wivik/devops-solutions-map:${{ steps.changelog.outputs.tag }}"
+          tags: "${{ env.REGISTRY }}/wivik/devops-solutions-map:${{ steps.changelog.outputs.tag }},${{ env.REGISTRY }}/wivik/devops-solutions-map:latest"
           file: Containerfile
           context: .
 
