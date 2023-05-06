@@ -1,3 +1,12 @@
+# [0.5.0](https://github.com/Wivik/devops-solutions-map/compare/v0.4.0...v0.5.0) (2023-05-06)
+
+
+### Features
+
+* customization :sparkles: ([3e8d093](https://github.com/Wivik/devops-solutions-map/commit/3e8d093def3cbce1a676fb5e9e24ce4e70a3ad75))
+
+
+
 # [0.4.0](https://github.com/Wivik/devops-solutions-map/compare/v0.3.0...v0.4.0) (2023-05-01)
 
 
@@ -47,15 +56,6 @@
 ### Bug Fixes
 
 * :zap: remove useless files in container ([6e7426b](https://github.com/Wivik/devops-solutions-map/commit/6e7426bc640bd35c971613dbc28fbce0e19a1eeb))
-
-
-
-# [0.2.0](https://github.com/Wivik/devops-solutions-map/compare/v0.1.0...v0.2.0) (2023-04-22)
-
-
-### Features
-
-* added about page :sparkles: ([29bec3f](https://github.com/Wivik/devops-solutions-map/commit/29bec3fa36d6cd801ee99f180a35128a67c146a0))
 
 
 
