@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import render_template, request, redirect, url_for, flash, session
+from flask import render_template, request, redirect, url_for, flash, session, send_from_directory
 from flask_frozen import Freezer
 from flask_wtf.csrf import CSRFProtect
 import argparse
@@ -33,7 +33,7 @@ if os.environ.get('DEVOPS_SOLUTIONS_FILE'):
 else:
     solutions_file_name = 'solutions.yaml'
 
-app_path = pathlib.Path(__file__).parent.absolute()
+app_path = app.root_path
 data_path = os.path.join(app_path, 'data')
 solutions_file = os.path.join(data_path, solutions_file_name)
 
@@ -47,6 +47,9 @@ if not os.path.exists(data_path):
 
 if args.freezer_base_url is not None:
     app.config['FREEZER_BASE_URL'] = args.freezer_base_url
+
+authorized_override_assets = ['style.css', 'custom.css', 'logo.png']
+authorized_override_assets_folders = ['css', 'img']
 
 ## here we go
 
@@ -148,7 +151,7 @@ def about():
     changelog = open(os.path.join(app_path, 'CHANGELOG.md'), 'r')
     changelog_content = markdown.markdown(changelog.read())
 
-    data_spec_file = open(os.path.join(app_path, 'data-format.md'), 'r')
+    data_spec_file = open(os.path.join(app_path, 'docs', 'data-format.md'), 'r')
     data_spec = markdown.markdown(data_spec_file.read(), extensions=['markdown.extensions.tables', 'markdown.extensions.fenced_code', 'markdown.extensions.codehilite'])
 
     version_file = open(os.path.join(app_path, 'version_file.json'), 'r')
@@ -156,6 +159,22 @@ def about():
     version = str(version['version'])
 
     return render_template('about.html.j2', changelog_content=changelog_content, version=version, data_spec=data_spec)
+
+## customization
+@app.route("/static/<path:folder>/<path:filename>")
+def custom_static(folder, filename):
+    ## If the asset can be overrided and exists we send it from the data dir
+    if folder in authorized_override_assets_folders and filename in authorized_override_assets:
+        fullpath = os.path.normpath(os.path.join(data_path, folder, filename))
+        if not fullpath.startswith(data_path):
+            return send_from_directory(app.static_folder, os.path.join(folder, filename))
+        if os.path.isfile(fullpath):
+            return send_from_directory(data_path, os.path.join(folder, filename))
+        else:
+            ## If the file does not exists or somebody mess up with the path, we use the static path
+            return send_from_directory(app.static_folder, os.path.join(folder, filename))
+    ## if not, we fallback on static dir
+    return send_from_directory(app.static_folder, os.path.join(folder, filename))
 
 if __name__ == '__main__':
     if args.freeze_mode:
