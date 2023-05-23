@@ -16,7 +16,7 @@ This tool can be used in two different ways.
 
 For both ways, the data displayed is formatted using a YAML file that will be rendered by the web application. The content is rendered using the file items order.
 
-Please refer the [Data format](data-format.md) documentation for more details.
+Please refer the [Data format](docs/data-format.md) documentation for more details.
 
 ### Command-line arguments
 
