@@ -68,7 +68,7 @@ def test_solutions_file(solutions_file):
 def read_solutions(solutions_file):
     """load the whole content of the file and return it"""
     with open(solutions_file, 'r') as file:
-        solutions_content = yaml.load(file, Loader=yaml.FullLoader)
+        solutions_content = yaml.safe_load(file)
     return solutions_content
 
 def get_tool_usage(search_tool, solutions):
@@ -95,6 +95,64 @@ def get_tool_usage(search_tool, solutions):
                             'isnew': isnew,
                         })
     return tool_usage
+
+def search(data, query):
+    results = []
+    search_result = handle_search(data, query)
+    print(search_result)
+    print(results)
+    return results
+
+def handle_search(data, query, path=[]):
+    query = query.lower()
+    # print(f'query {query}')
+    if isinstance(data, list):
+        # print('isinstance data')
+        for index,item in enumerate(data):
+            path.append(str(index))
+            # print(f'str index ', str(index))
+            handle_search(item, query, path)
+            path.pop()
+    elif isinstance(data, dict):
+        for key, value in data.items():
+            # print(f'key ', key)
+            path.append(key)
+            print(f'path ', path)
+            # print(f'value ', value)
+            if key == 'name' and value.lower() == query:
+                print(f"Tool Found: {query}")
+                print("Related Use Cases:")
+                print(f'path -2' , path[:-2])
+                # for uc_path in path:
+                #     print(f'uc path ', uc_path)
+                uc_data = get_data_by_path(data, path[:-2])
+                if uc_data:
+                    print('uc_data')
+                    print(uc_data['name'])
+                    return uc_data['name']
+            elif isinstance(value, (list, dict)):
+                handle_search(value, query, path)
+            path.pop()
+
+
+def get_data_by_path(data, path):
+    print(f'path ', path)
+    try:
+        for key in path:
+            print(f'key ', key)
+            if isinstance(data, dict):
+                print('isinstance dict')
+                data = data.get(key)
+                print(f'data : ', data)
+            elif isinstance(data, list):
+                print('isinstance list')
+                index = int(key)
+                data = data[index]
+        print(f'data ', data)
+        return data
+    except (KeyError, IndexError):
+        print('no data')
+        return None
 
 ## render main template
 
@@ -175,6 +233,16 @@ def custom_static(folder, filename):
             return send_from_directory(app.static_folder, os.path.join(folder, filename))
     ## if not, we fallback on static dir
     return send_from_directory(app.static_folder, os.path.join(folder, filename))
+
+## search engine
+@app.route("/search", methods=['POST'])
+def search_view():
+    query_data = request.form
+    query = query_data['query']
+    solutions = read_solutions(solutions_file)
+    results = search(solutions, query)
+    return render_template('search.html.j2', results=results)
+
 
 if __name__ == '__main__':
     if args.freeze_mode:

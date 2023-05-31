@@ -8,4 +8,9 @@
     <a href="{{ url_for('main', open='all') }}">Open all Boxes</a>
     {% endif %}
     <a href="{{ url_for('about') }}">About</a>
+    <form action="{{ url_for('search_view') }}" method="POST">
+        <input type="text" name="query" placeholder="Search a use case or a tool" />
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <input type="submit" value="Search" />
+    </form>
 </nav>
