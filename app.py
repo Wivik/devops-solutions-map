@@ -48,6 +48,9 @@ if not os.path.exists(data_path):
 if args.freezer_base_url is not None:
     app.config['FREEZER_BASE_URL'] = args.freezer_base_url
 
+if args.freeze_mode:
+    app.config['FREEZER_MODE'] = True
+
 authorized_override_assets = ['style.css', 'custom.css', 'logo.png']
 authorized_override_assets_folders = ['css', 'img']
 
@@ -68,7 +71,7 @@ def test_solutions_file(solutions_file):
 def read_solutions(solutions_file):
     """load the whole content of the file and return it"""
     with open(solutions_file, 'r') as file:
-        solutions_content = yaml.load(file, Loader=yaml.FullLoader)
+        solutions_content = yaml.safe_load(file)
     return solutions_content
 
 def get_tool_usage(search_tool, solutions):
@@ -95,6 +98,24 @@ def get_tool_usage(search_tool, solutions):
                             'isnew': isnew,
                         })
     return tool_usage
+
+def search(data, query):
+    results = []
+
+    def search_data(data, path):
+        if isinstance(data, list):
+            for i, item in enumerate(data):
+                search_data(item, path + [str(i)])
+        elif isinstance(data, dict):
+            if "name" in data and query.lower() in data["name"].lower():
+                results.append((path, data["name"]))
+            for key, value in data.items():
+                search_data(value, path + [key])
+
+    search_data(data, [])
+    return results
+
+
 
 ## render main template
 
@@ -175,6 +196,16 @@ def custom_static(folder, filename):
             return send_from_directory(app.static_folder, os.path.join(folder, filename))
     ## if not, we fallback on static dir
     return send_from_directory(app.static_folder, os.path.join(folder, filename))
+
+## search engine
+@app.route("/search", methods=['POST'])
+def search_view():
+    query_data = request.form
+    query = query_data['query']
+    solutions = read_solutions(solutions_file)
+    results = search(solutions, query)
+    return render_template('search.html.j2', results=results, solutions=solutions, query=query)
+
 
 if __name__ == '__main__':
     if args.freeze_mode:

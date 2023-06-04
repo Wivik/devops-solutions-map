@@ -1,0 +1,36 @@
+{% extends 'base.html.j2' %}
+
+{% block content %}
+
+<div id="content">
+<h1>Search results for '{{ query }}'</h1>
+
+<p> 📝 : Use case<br />🛠️ : Tool</p>
+{% if results | length > 0 %}
+<ul>
+{% for path, name in results %}
+    {% if path[5] %}
+        {% set side = solutions['devops']['sides'][path[2] | int].name  %}
+        {% set step = solutions['devops']['sides'][path[2] | int]['steps'][path[4] | int].name  %}
+        {% set usecase = solutions['devops']['sides'][path[2] | int]['steps'][path[4] | int]['usecases'][path[6] |int ].name %}
+
+        {% if path[7] %}
+            {% set tool_name = solutions['devops']['sides'][path[1] | int]['steps'][path[4] | int]['usecases'][path[6] |int ]['tools'][path[8] | int].name  %}
+            <li>🛠️ {{ side | capitalize}} &gt; {{ step | capitalize }} &gt; {{ usecase }} : <a href="{{ url_for('tool_view', tool=tool_name) }}">{{ tool_name }}</a> </li>
+            {% else %}
+            <li>📝 {{ side | capitalize}} &gt; {{ step | capitalize }} &gt; <a href="{{ url_for('usecase_view', side=side, step=step, usecase=usecase) }}">{{ usecase }}</a></li>
+        {% endif %}
+    {% endif %}
+
+
+{% endfor %}
+</ul>
+{% else %}
+<p style="text-align: center;">¯\_(ツ)_/¯ <br/> Nothing found.</p>
+{% endif %}
+
+
+
+</div>
+
+{% endblock %}
