@@ -98,61 +98,21 @@ def get_tool_usage(search_tool, solutions):
 
 def search(data, query):
     results = []
-    search_result = handle_search(data, query)
-    print(search_result)
-    print(results)
+
+    def search_data(data, path):
+        if isinstance(data, list):
+            for i, item in enumerate(data):
+                search_data(item, path + [str(i)])
+        elif isinstance(data, dict):
+            if "name" in data and query.lower() in data["name"].lower():
+                results.append((path, data["name"]))
+            for key, value in data.items():
+                search_data(value, path + [key])
+    
+    search_data(data, [])
     return results
 
-def handle_search(data, query, path=[]):
-    query = query.lower()
-    # print(f'query {query}')
-    if isinstance(data, list):
-        # print('isinstance data')
-        for index,item in enumerate(data):
-            path.append(str(index))
-            # print(f'str index ', str(index))
-            handle_search(item, query, path)
-            path.pop()
-    elif isinstance(data, dict):
-        for key, value in data.items():
-            # print(f'key ', key)
-            path.append(key)
-            print(f'path ', path)
-            # print(f'value ', value)
-            if key == 'name' and value.lower() == query:
-                print(f"Tool Found: {query}")
-                print("Related Use Cases:")
-                print(f'path -2' , path[:-2])
-                # for uc_path in path:
-                #     print(f'uc path ', uc_path)
-                uc_data = get_data_by_path(data, path[:-2])
-                if uc_data:
-                    print('uc_data')
-                    print(uc_data['name'])
-                    return uc_data['name']
-            elif isinstance(value, (list, dict)):
-                handle_search(value, query, path)
-            path.pop()
 
-
-def get_data_by_path(data, path):
-    print(f'path ', path)
-    try:
-        for key in path:
-            print(f'key ', key)
-            if isinstance(data, dict):
-                print('isinstance dict')
-                data = data.get(key)
-                print(f'data : ', data)
-            elif isinstance(data, list):
-                print('isinstance list')
-                index = int(key)
-                data = data[index]
-        print(f'data ', data)
-        return data
-    except (KeyError, IndexError):
-        print('no data')
-        return None
 
 ## render main template
 
@@ -241,7 +201,7 @@ def search_view():
     query = query_data['query']
     solutions = read_solutions(solutions_file)
     results = search(solutions, query)
-    return render_template('search.html.j2', results=results)
+    return render_template('search.html.j2', results=results, solutions=solutions, query=query)
 
 
 if __name__ == '__main__':
