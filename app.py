@@ -48,6 +48,9 @@ if not os.path.exists(data_path):
 if args.freezer_base_url is not None:
     app.config['FREEZER_BASE_URL'] = args.freezer_base_url
 
+if args.freeze_mode:
+    app.config['FREEZER_MODE'] = True
+
 authorized_override_assets = ['style.css', 'custom.css', 'logo.png']
 authorized_override_assets_folders = ['css', 'img']
 
@@ -108,7 +111,7 @@ def search(data, query):
                 results.append((path, data["name"]))
             for key, value in data.items():
                 search_data(value, path + [key])
-    
+
     search_data(data, [])
     return results
 
@@ -195,13 +198,19 @@ def custom_static(folder, filename):
     return send_from_directory(app.static_folder, os.path.join(folder, filename))
 
 ## search engine
-@app.route("/search", methods=['POST'])
+@app.route("/search", methods=['GET', 'POST'])
 def search_view():
-    query_data = request.form
-    query = query_data['query']
-    solutions = read_solutions(solutions_file)
-    results = search(solutions, query)
-    return render_template('search.html.j2', results=results, solutions=solutions, query=query)
+    if request.method == 'GET':
+        results = []
+        solutions = read_solutions(solutions_file)
+        query = ''
+        return render_template('search.html.j2', results=results, solutions=solutions, query=query)
+    else:
+        query_data = request.form
+        query = query_data['query']
+        solutions = read_solutions(solutions_file)
+        results = search(solutions, query)
+        return render_template('search.html.j2', results=results, solutions=solutions, query=query)
 
 
 if __name__ == '__main__':
