@@ -96,6 +96,11 @@ Then, run the container in the same way.
 
 Instead of starting a web server, DevOps Solutions Map can also produce static HTML files you can host on any web hosting service.
 
+⚠️ Limitations about the static mode :
+
+- "Open all boxes" link won't work
+- The search engine feature is disabled in static mode
+
 #### Generate static website using the sources
 
 Setup the virtualenv and the dependencies with the same method as described in [run from the sources](#run-from-sources)

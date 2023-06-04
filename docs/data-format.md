@@ -2,6 +2,8 @@
 
 DevOps Solutions Map uses a data file name by default `solutions.yaml` and expected to be in the `data/` folder.
 
+The file name can be overrided by an environment variable named `DEVOPS_SOLUTIONS_FILE`. However, the presence of the file in `data/` remains mandatory.
+
 This file defines the displayed content. It is split into two main sections.
 
 ## devops section
