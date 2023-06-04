@@ -1,3 +1,19 @@
+# [0.6.0](https://github.com/Wivik/devops-solutions-map/compare/v0.5.0...v0.6.0) (2023-06-04)
+
+
+### Bug Fixes
+
+* fixed static generator with method ([cf639a2](https://github.com/Wivik/devops-solutions-map/commit/cf639a27e9be5c49e18d0e02d68c702cdeab790a))
+* fixed unit testing and security issue ([f0ea217](https://github.com/Wivik/devops-solutions-map/commit/f0ea2175061c8f80cf9f8c39c0c5755f66baf570))
+
+
+### Features
+
+* init search engine feature :sparkles: [#7](https://github.com/Wivik/devops-solutions-map/issues/7) ([e73d014](https://github.com/Wivik/devops-solutions-map/commit/e73d014c13f6cc6c606b76743b5ff4a9724b6010))
+* search engine available :sparkles: ([a9be78f](https://github.com/Wivik/devops-solutions-map/commit/a9be78f675d9f0ce4dbafb10d7b97f0e60de98bd))
+
+
+
 # [0.5.0](https://github.com/Wivik/devops-solutions-map/compare/v0.4.0...v0.5.0) (2023-05-06)
 
 
@@ -47,15 +63,6 @@
 * :pencil: another typo in readme ([e10e025](https://github.com/Wivik/devops-solutions-map/commit/e10e025c689b0fd1bbf8981bb8f03618daf24dc6))
 * :pencil: change the title tag content ([b001715](https://github.com/Wivik/devops-solutions-map/commit/b0017159419b32675dfe399105be76ff5d04a8ef))
 * missing markdown in requirement closes [#2](https://github.com/Wivik/devops-solutions-map/issues/2) ([b9ba9af](https://github.com/Wivik/devops-solutions-map/commit/b9ba9af8eff769968ff35243dd6776cf117a01e3))
-
-
-
-## [0.2.1](https://github.com/Wivik/devops-solutions-map/compare/v0.2.0...v0.2.1) (2023-04-23)
-
-
-### Bug Fixes
-
-* :zap: remove useless files in container ([6e7426b](https://github.com/Wivik/devops-solutions-map/commit/6e7426bc640bd35c971613dbc28fbce0e19a1eeb))
 
 
 
