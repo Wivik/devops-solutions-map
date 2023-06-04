@@ -7,6 +7,7 @@ class TestApp(unittest.TestCase):
     def setUp(self):
         app.config['TESTING'] = True
         self.app = app.test_client()
+        app.config['FREEZER_MODE'] = True
         self.frozen = freezer.freeze()
 
     def test_index(self):

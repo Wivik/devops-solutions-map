@@ -198,19 +198,13 @@ def custom_static(folder, filename):
     return send_from_directory(app.static_folder, os.path.join(folder, filename))
 
 ## search engine
-@app.route("/search", methods=['GET', 'POST'])
+@app.route("/search", methods=['POST'])
 def search_view():
-    if request.method == 'GET':
-        results = []
-        solutions = read_solutions(solutions_file)
-        query = ''
-        return render_template('search.html.j2', results=results, solutions=solutions, query=query)
-    else:
-        query_data = request.form
-        query = query_data['query']
-        solutions = read_solutions(solutions_file)
-        results = search(solutions, query)
-        return render_template('search.html.j2', results=results, solutions=solutions, query=query)
+    query_data = request.form
+    query = query_data['query']
+    solutions = read_solutions(solutions_file)
+    results = search(solutions, query)
+    return render_template('search.html.j2', results=results, solutions=solutions, query=query)
 
 
 if __name__ == '__main__':
