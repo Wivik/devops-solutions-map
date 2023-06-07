@@ -19,6 +19,13 @@
             {% include 'main_menu.html.j2' %}
         </header>
         <section>
+            {% if get_flashed_messages() %}
+            <div class="flash">
+                {% for message in get_flashed_messages() %}
+                {{ message }}<br />
+                {% endfor %}
+            </div>
+            {% endif %}
             {% block content %} {% endblock %}
             <div id="legend">
                 <details>
