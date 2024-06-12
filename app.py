@@ -3,10 +3,12 @@ from flask import render_template, request, redirect, url_for, flash, session, s
 from flask_frozen import Freezer
 from flask_wtf.csrf import CSRFProtect
 import argparse
+import hashlib
 import json
 import markdown
 import os
 import pathlib
+import requests
 import sys
 import yaml
 
@@ -27,11 +29,15 @@ args = arg_parser.parse_args()
 
 ## solutions file is expected to be an env var
 ## defaulting to solutions.yaml
-
 if os.environ.get('DEVOPS_SOLUTIONS_FILE'):
     solutions_file_name = os.environ('DEVOPS_SOLUTIONS_FILE')
 else:
     solutions_file_name = 'solutions.yaml'
+
+## the global vars
+global app_path
+global data_path
+global solutions_file
 
 app_path = app.root_path
 data_path = os.path.join(app_path, 'data')
@@ -54,6 +60,10 @@ if args.freeze_mode:
 authorized_override_assets = ['style.css', 'custom.css', 'logo.png']
 authorized_override_assets_folders = ['css', 'img']
 
+## remote file option, allowed checkums
+app.config['REMOTE_FILE_ALLOWED_CHECKSUMS'] = []
+app.config['REMOTE_FILE_DISABLE_CHECKSUM_VERIFICATION'] = False
+
 ## here we go
 
 def markdown_filter(text):
@@ -62,11 +72,48 @@ def markdown_filter(text):
 app.jinja_env.filters['markdown'] = markdown_filter
 
 
-def test_solutions_file(solutions_file):
-    if os.path.exists(solutions_file):
-        return True
+def test_solutions_file():
+    ## has it been provided using the get option ?
+    if request.args and 'solutionsfile' in request.args:
+        print('http provided')
+        test_file_quality = test_remote_file_quality(request.args['solutionsfile'])
+        if test_file_quality:
+            solutions_file_name = write_remote_file(request.args['solutionsfile'])
+            return solutions_file_name
+        else:
+            return False
+    ## Is the file exists in the data folder ? (default)
+    elif os.path.exists(solutions_file):
+        return solutions_file
     else:
         return False
+
+def test_remote_file_quality(remote_solutions_file):
+    try:
+        response = requests.get(remote_solutions_file)
+    except requests.exceptions.ConnectionError as e:
+        flash(message=f"Cannot fetch URL {remote_solutions_file}, error was {e}", category='error')
+        return False
+    sha256_hash = hashlib.sha256(response.content)
+    print(response.content)
+    downloaded_file_checksum = sha256_hash.hexdigest()
+    if app.config['REMOTE_FILE_DISABLE_CHECKSUM_VERIFICATION'] is True:
+        if downloaded_file_checksum in app.config['REMOTE_FILE_ALLOWED_CHECKSUMS']:
+            return True
+        else:
+            print('Checksum verification failed')
+            return False
+    else:
+        print('Warning : checksum not verified')
+        return True
+
+def write_remote_file(remote_solutions_file):
+    response = requests.get(remote_solutions_file)
+    remote_file_name = os.path.join(data_path, 'remote_solutions_file.yaml')
+    with open(remote_file_name, 'w') as remote_file:
+        remote_file.write(response.content)
+        remote_file.close()
+    return remote_file_name
 
 def read_solutions(solutions_file):
     """load the whole content of the file and return it"""
@@ -122,8 +169,15 @@ def search(data, query):
 @app.route("/")
 def main(side=None, step=None):
 
-    if not test_solutions_file(solutions_file):
+    test_solutions_file_return = test_solutions_file()
+
+    ## false = no file provided at all
+    if not test_solutions_file_return:
         return render_template('no-file.html.j2')
+
+    ## override the solutions_file global variable with the new file path returned by test_solutions_file
+
+    solutions_file = test_solutions_file_return
 
     solutions_content = read_solutions(solutions_file)
     devops_content = solutions_content['devops']
@@ -133,7 +187,7 @@ def main(side=None, step=None):
 @app.route("/tool/<string:tool>.html")
 def tool_view(tool):
 
-    if not test_solutions_file(solutions_file):
+    if not test_solutions_file():
         return render_template('no-file.html.j2')
 
     solutions_content = read_solutions(solutions_file)
@@ -150,7 +204,7 @@ def tool_view(tool):
 @app.route("/side/<string:side>/step/<string:step>/usecase/<string:usecase>.html")
 def usecase_view(side, step, usecase=None):
 
-    if not test_solutions_file(solutions_file):
+    if not test_solutions_file():
         return render_template('no-file.html.j2')
 
     usecase_content = []
