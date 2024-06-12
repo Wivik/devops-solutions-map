@@ -10,7 +10,7 @@ import pathlib
 import sys
 import yaml
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 app.config['SECRET_KEY'] = os.urandom(32)
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 csrf = CSRFProtect()
