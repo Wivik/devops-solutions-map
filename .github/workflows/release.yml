@@ -25,7 +25,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Produce release note
-        uses: TriPSs/conventional-changelog-action@v5
+        uses: TriPSs/conventional-changelog-action@v6
         id: changelog
         with:
           github-token: ${{ secrets.github_token }}
