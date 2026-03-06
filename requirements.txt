@@ -1,6 +1,6 @@
 Flask==2.2.5
 Flask-WTF==1.0.0
 PyYAML==6.0
-Markdown==3.3.7
+Markdown==3.8.1
 Frozen-Flask==0.18
 
